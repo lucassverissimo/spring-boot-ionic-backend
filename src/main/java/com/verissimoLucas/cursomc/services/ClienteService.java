@@ -11,14 +11,14 @@ import com.verissimoLucas.cursomc.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class ClienteService {
-	
+
 	@Autowired
 	private ClienteRepository repo;
-	
+
 	public Cliente find(Integer id) {
-		Optional<Cliente> obj = repo.findById(id);		
-		return obj.orElseThrow( () -> new ObjectNotFoundException(
-				"Objeto não encontrado! Id: "+ id + ", Tipo: "+ Cliente.class.getName()));
+		Optional<Cliente> obj = repo.findById(id);
+		return obj.orElseThrow(() -> new ObjectNotFoundException(
+				"Objeto não encontrado! Id: " + id + ", Tipo: " + Cliente.class.getName()));
 	}
 
 }

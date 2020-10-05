@@ -8,5 +8,4 @@ import com.verissimoLucas.cursomc.domain.ItemPedido;
 @Repository
 public interface ItemPedidoRepository extends JpaRepository<ItemPedido, Integer> {
 
-	
 }

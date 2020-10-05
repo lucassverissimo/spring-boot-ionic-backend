@@ -8,5 +8,4 @@ import com.verissimoLucas.cursomc.domain.Cidade;
 @Repository
 public interface CidadeRepository extends JpaRepository<Cidade, Integer> {
 
-	
 }

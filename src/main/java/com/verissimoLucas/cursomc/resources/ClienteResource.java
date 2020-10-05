@@ -11,15 +11,15 @@ import com.verissimoLucas.cursomc.domain.Cliente;
 import com.verissimoLucas.cursomc.services.ClienteService;
 
 @RestController
-@RequestMapping(value="/clientes")
+@RequestMapping(value = "/clientes")
 public class ClienteResource {
-	
+
 	@Autowired
 	private ClienteService service;
-	
-	@RequestMapping(value="/{id}", method=RequestMethod.GET)
+
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Cliente> find(@PathVariable Integer id) {
 		Cliente obj = service.find(id);
-		return ResponseEntity.ok().body(obj);				
-	}	
+		return ResponseEntity.ok().body(obj);
+	}
 }
