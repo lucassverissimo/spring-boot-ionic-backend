@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.verissimoLucas.cursomc.domain.Produto;
-import com.verissimoLucas.cursomc.dto.CategoriaDTO;
 import com.verissimoLucas.cursomc.dto.ProdutoDTO;
 import com.verissimoLucas.cursomc.resources.utils.URL;
 import com.verissimoLucas.cursomc.services.ProdutoService;
