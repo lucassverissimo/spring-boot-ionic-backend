@@ -9,7 +9,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -21,18 +20,16 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.verissimoLucas.cursomc.dto.CredenciaisDTO;
 
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
-	
-	@Autowired
-	AuthenticationManager authenticationManager;
-	@Autowired
-	JWTUtil jwtUtil;
-	
-	
-	public JWTAuthenticationFilter(AuthenticationManager authenticationManager, JWTUtil jwtUtil) {
-		setAuthenticationFailureHandler(new JWTAuthenticationFailureHandler());
+
+	private AuthenticationManager authenticationManager;
+    
+    private JWTUtil jwtUtil;
+
+    public JWTAuthenticationFilter(AuthenticationManager authenticationManager, JWTUtil jwtUtil) {
+    	setAuthenticationFailureHandler(new JWTAuthenticationFailureHandler());
         this.authenticationManager = authenticationManager;
         this.jwtUtil = jwtUtil;
-	}
+    }
 	
 	@Override
     public Authentication attemptAuthentication(HttpServletRequest req,
@@ -82,5 +79,4 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                 + "\"path\": \"/login\"}";
         }
     }
-	
 }
