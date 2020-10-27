@@ -14,7 +14,7 @@ public class JWTUtil {
 	
 	@Value("${jwt.secret}")
 	private String secret;
-	
+
 	@Value("${jwt.expiration}")
 	private Long expiration;
 	
@@ -32,19 +32,11 @@ public class JWTUtil {
 			String username = claims.getSubject();
 			Date expirationDate = claims.getExpiration();
 			Date now = new Date(System.currentTimeMillis());
-			
-			return username != null && expirationDate != null && now.before(expirationDate);
-			
+			if (username != null && expirationDate != null && now.before(expirationDate)) {
+				return true;
+			}
 		}
 		return false;
-	}
-
-	private Claims getClaims(String token) {
-		try {			
-			return Jwts.parser().setSigningKey(secret.getBytes()).parseClaimsJws(token).getBody();
-		} catch (Exception e) {
-			return null;
-		}
 	}
 
 	public String getUsername(String token) {
@@ -53,5 +45,14 @@ public class JWTUtil {
 			return claims.getSubject();
 		}
 		return null;
+	}
+	
+	private Claims getClaims(String token) {
+		try {
+			return Jwts.parser().setSigningKey(secret.getBytes()).parseClaimsJws(token).getBody();
+		}
+		catch (Exception e) {
+			return null;
+		}
 	}
 }

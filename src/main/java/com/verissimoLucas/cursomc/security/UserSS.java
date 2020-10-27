@@ -21,9 +21,7 @@ public class UserSS implements UserDetails {
 	public UserSS() {
 		
 	}
-	
-	
-	
+		
 	public UserSS(Integer id, String email, String senha, Set<Perfil> perfis) {
 		super();
 		this.id = id;
@@ -31,8 +29,6 @@ public class UserSS implements UserDetails {
 		this.senha = senha;
 		this.authorities = perfis.stream().map(x -> new SimpleGrantedAuthority(x.getDescricao())).collect(Collectors.toList());
 	}
-
-
 
 	public Integer getId() {
 		return id;
@@ -72,6 +68,8 @@ public class UserSS implements UserDetails {
 	public boolean isEnabled() {
 		return true;
 	}
-	
-	
+
+	public boolean hasRole(Perfil perfil) {
+		return getAuthorities().contains(new SimpleGrantedAuthority(perfil.getDescricao()));
+	}
 }
