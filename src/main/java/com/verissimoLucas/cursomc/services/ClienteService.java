@@ -1,6 +1,7 @@
 package com.verissimoLucas.cursomc.services;
 
 import java.net.URI;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -113,6 +114,18 @@ public class ClienteService {
 	}
 	
 	public URI uploadProfilePicture(MultipartFile multipartFile) {
-		return s3Service.uploadFile(multipartFile);
+		UserSS user = UserService.authenticated();
+		if (user == null) {
+			throw new AuthorizationException("Acesso Negado!");
+		}
+		
+		URI uri = s3Service.uploadFile(multipartFile); 
+		
+		Optional<Cliente> cli = repo.findById(user.getId());
+		cli.get().setImageUrl(uri.toString());
+		repo.saveAll(Arrays.asList(cli.get()));
+		
+		return uri;
+		
 	}
 }
