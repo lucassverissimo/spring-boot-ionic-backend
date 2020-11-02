@@ -31,7 +31,7 @@ public class AuthResource {
 		UserSS user = UserService.authenticated();
 		String token = jwtUtil.generateToken(user.getUsername());
 		response.addHeader("Access-Control-Expose-Headers", "XSRF-TOKEN, Authorization");
-		response.addHeader("Authorization", "Baerer "+token);
+		response.addHeader("Authorization", "Bearer "+token);
 		return ResponseEntity.noContent().build();
 	}
 	
